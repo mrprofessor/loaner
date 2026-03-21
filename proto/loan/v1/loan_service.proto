@@ -1,0 +1,18 @@
+// Loan Service
+
+syntax = "proto3";
+
+package loan.v1;
+
+import "google/api/annotations.proto";
+
+import "loan/v1/calculate_repayment_request.proto";
+import "loan/v1/calculate_repayment_response.proto";
+
+service LoanService {
+    rpc CalculateRepayment(CalculateRepaymentRequest) returns (CalculateRepaymentResponse) {
+        option (google.api.http) = {
+            get: "/v1/loan/repayment"
+        };
+    }
+}

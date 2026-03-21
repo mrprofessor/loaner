@@ -1,0 +1,12 @@
+// Loan repayment response
+
+syntax = "proto3";
+
+package loan.v1;
+
+import "google/protobuf/timestamp.proto";
+
+message CalculateRepaymentResponse {
+    string monthly_repayment = 1;
+    google.protobuf.Timestamp calculated_at = 2;
+}

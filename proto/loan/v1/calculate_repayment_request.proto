@@ -1,0 +1,12 @@
+// Calculate Loan repayment request
+
+syntax = "proto3";
+
+package loan.v1;
+
+
+message CalculateRepaymentRequest {
+    string loan_amount = 1;
+    string annual_interest_rate = 2;
+    int32 num_payments = 3;
+}
