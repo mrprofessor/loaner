@@ -1,6 +1,6 @@
 package store
 
-import "github.com/jackc/pgx/v4/pgxpool"
+import "github.com/jackc/pgx/v5/pgxpool"
 
 type Store struct {
 	pool *pgxpool.Pool
