@@ -9,6 +9,7 @@ import (
 	"google.golang.org/grpc/status"
 )
 
+// RecoveryInterceptor is a gRPC unary interceptor that recovers from panics and returns an Internal error.
 func RecoveryInterceptor(ctx context.Context, req any, info *grpc.UnaryServerInfo, handler grpc.UnaryHandler) (resp any, err error) {
 	defer func() {
 		if r := recover(); r != nil {

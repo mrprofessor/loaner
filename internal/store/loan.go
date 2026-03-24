@@ -7,6 +7,7 @@ import (
 	"github.com/shopspring/decimal"
 )
 
+// InsertLoanCalculation persists a loan repayment calculation to the database.
 func (s *Store) InsertLoanCalculation(ctx context.Context, loanAmount, annualRate decimal.Decimal, numPayments int32, monthlyRepayment decimal.Decimal, calculatedAt time.Time) error {
 	_, err := s.pool.Exec(ctx,
 		`INSERT INTO loan_repayment (loan_amount, annual_rate, num_payments, monthly_repayment, calculated_at)

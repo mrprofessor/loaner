@@ -9,6 +9,7 @@ import (
 	"google.golang.org/grpc/status"
 )
 
+// LoggingInterceptor is a gRPC unary interceptor that logs the method, duration, and status of each request.
 func LoggingInterceptor(ctx context.Context, req any, info *grpc.UnaryServerInfo, handler grpc.UnaryHandler) (any, error) {
 	start := time.Now()
 	resp, err := handler(ctx, req)

@@ -13,15 +13,18 @@ import (
 	"google.golang.org/protobuf/types/known/timestamppb"
 )
 
+// LoanHandler implements the LoanService gRPC server.
 type LoanHandler struct {
 	loanv1.UnimplementedLoanServiceServer
 	store *store.Store
 }
 
+// New creates a LoanHandler with the given store.
 func New(s *store.Store) *LoanHandler {
 	return &LoanHandler{store: s}
 }
 
+// CalculateRepayment validates the request, computes the monthly repayment, persists the result, and returns it.
 func (s *LoanHandler) CalculateRepayment(ctx context.Context, req *loanv1.CalculateRepaymentRequest) (*loanv1.CalculateRepaymentResponse, error) {
 	loanAmount, err := decimal.NewFromString(req.LoanAmount)
 	if err != nil || loanAmount.LessThanOrEqual(decimal.Zero) {

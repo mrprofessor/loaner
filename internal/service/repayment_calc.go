@@ -2,6 +2,8 @@ package service
 
 import "github.com/shopspring/decimal"
 
+// CalcPMT calculates the monthly repayment for a loan using the PMT formula.
+// annualRate is a percentage (e.g. 5.5 for 5.5%). Returns the result rounded to 2 decimal places.
 func CalcPMT(principal, annualRate decimal.Decimal, numPayments int32) decimal.Decimal {
 	// Convert percentage to decimal (e.g. 5.5 -> 0.055)
 	annualRate = annualRate.Div(decimal.NewFromInt(100))

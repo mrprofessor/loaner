@@ -26,6 +26,11 @@ Start the server:
 make run
 ```
 
+Run tests
+```bash
+make test
+```
+
 ## API
 
 The service exposes both HTTP (port 8080) and gRPC (port 9090).
@@ -109,3 +114,32 @@ go mod tidy
 - **shopspring/decimal** - all arithmetic uses exact decimal math, not `float64`. A rounding error on a 30-year mortgage compounds into real money.
 - **NUMERIC in Postgres** - matches the decimal library, no precision loss in storage either.
 - **Percentage input** - the API accepts `5.5` meaning 5.5%
+
+## Docs
+
+Browse Go documentation locally:
+```bash
+go install golang.org/x/pkgsite/cmd/pkgsite@latest
+pkgsite -http=:6060
+```
+Then open http://localhost:6060/github.com/mrprofessor/loaner
+
+## Project Structure
+
+```
+loaner/
+├── cmd/server/main.go          # entrypoint
+├── proto/loan/v1/              # protobuf defs
+├── gen/loan/v1/                # generated gRPC + gateway code
+├── internal/
+│   ├── handler/                # gRPC handlers
+│   ├── service/                # Business stuff (PMT)
+│   ├── store/                  # Database layer
+│   ├── config/                 # config
+│   └── middleware/             # middlewares (logging, recovery)
+├── migrations/                 # SQL schema migrations
+├── deploy/                     # kubernetes
+├── Dockerfile
+├── docker-compose.yml
+└── Makefile
+```
