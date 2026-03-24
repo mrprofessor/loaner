@@ -11,7 +11,7 @@ func (s *Store) InsertLoanCalculation(ctx context.Context, loanAmount, annualRat
 	_, err := s.pool.Exec(ctx,
 		`INSERT INTO loan_repayment (loan_amount, annual_rate, num_payments, monthly_repayment, calculated_at)
          VALUES ($1, $2, $3, $4, $5)`,
-		loanAmount.String(), annualRate.String(), numPayments, monthlyRepayment.String(), calculatedAt,
+		loanAmount, annualRate, numPayments, monthlyRepayment, calculatedAt,
 	)
 	return err
 }
