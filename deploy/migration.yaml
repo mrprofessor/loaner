@@ -1,0 +1,20 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: loaner-migrate
+spec:
+  template:
+    spec:
+      containers:
+      - name: migrate
+        image: loaner:latest
+        imagePullPolicy: Never
+        command: ["/bin/sh", "-c"]
+        args:
+          - |
+            wget -qO- https://github.com/golang-migrate/migrate/releases/download/v4.17.0/migrate.linux-amd64.tar.gz | tar xvz
+            ./migrate -path=/root/migrations -database="$DATABASE_URL" up
+        env:
+        - name: DATABASE_URL
+          value: postgres://loaner:loaner@postgres:5432/loaner?sslmode=disable
+      restartPolicy: OnFailure
