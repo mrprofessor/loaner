@@ -79,6 +79,21 @@ kubectl apply -f deploy/loaner.yaml
 
 HTTP is available on NodePort 30880, gRPC on 30890.
 
+To tear down and redeploy from scratch:
+```bash
+kubectl delete -f deploy/loaner.yaml
+kubectl delete -f deploy/migration.yaml
+kubectl delete -f deploy/postgres.yaml
+kubectl delete pvc postgres-storage-postgres-0
+
+docker build -t loaner:latest .
+kind load docker-image loaner:latest --name localdev
+
+kubectl apply -f deploy/postgres.yaml
+kubectl apply -f deploy/migration.yaml
+kubectl apply -f deploy/loaner.yaml
+```
+
 ## Proto code-gen
 
 Regenerate gRPC and gateway code from proto definitions:
