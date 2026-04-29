@@ -50,8 +50,8 @@ buf curl --protocol grpc --http2-prior-knowledge \
 Response:
 ```json
 {
-  "monthlyRepayment": "567.79",
-  "calculatedAt": "2026-03-24T15:08:38.052732853Z"
+  "monthlyRepayment": "<result>",
+  "calculatedAt": "YYYY-MM-DDT15:08:38.052732853Z"
 }
 ```
 
